@@ -2,7 +2,6 @@ const MovieView = function(primaryParent){
   this.primaryParent = primaryParent;
 
 }
-
 MovieView.prototype.renderView = function (title,description) {
 
   const movieTitle = document.createElement('h2');
@@ -21,14 +20,17 @@ MovieView.prototype.buildElement = function (element,content,parent) {
   parent.appendChild(newItem);
 };
 
-MovieView.prototype.renderSelected = function (movieData) {
+MovieView.prototype.renderSelected = function (moviesData) {
 
   const container = document.createElement('div');
   container.classList.add('movieItem');
   this.primaryParent.appendChild(container);
 
-  this.buildElement('h2',movieData.title,container);
-  this.buildElement('p',movieData.description,container);
+  moviesData.forEach((movie) => {
+
+    this.buildElement('h2',movie.title,container);
+    this.buildElement('p',movie.description,container);
+  })
 
 };
 

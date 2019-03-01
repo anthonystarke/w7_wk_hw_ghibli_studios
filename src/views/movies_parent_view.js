@@ -21,7 +21,8 @@ MoviesParentView.prototype.bindEvents = function () {
     parent.innerHTML = '';
 
     const movieView = new MovieView(parent);
-    movieView.renderSelected(evt.detail);
+    const moviesOfYear = evt.detail;
+    movieView.renderSelected(moviesOfYear);
   })
 
   dateDropDownList.addEventListener('change',(evt) => {

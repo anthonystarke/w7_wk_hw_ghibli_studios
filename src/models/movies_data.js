@@ -42,11 +42,10 @@ MoviesData.prototype.getYearData = function () {
     return movieItem.release_date;
   });
   return this.unique(array)
-
 };
 
-MoviesData.prototype.getSelectedObject = function(itemIndex) {
-  return this.moviesData.[itemIndex];
+MoviesData.prototype.getSelectedObject = function(release_year) {
+  return this.moviesData.filter( movie => movie.release_date === release_year);
 };
 
 MoviesData.prototype.unique = function (array) {
