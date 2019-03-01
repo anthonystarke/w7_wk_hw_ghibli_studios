@@ -14,7 +14,7 @@ MoviesParentView.prototype.bindEvents = function () {
     this.buildRateDropDown();
 
   });
-  const dropDownList = document.querySelector('#dateDropDown');
+  const dateDropDownList = document.querySelector('#dateDropDown');
 
   PubSub.subscribe('MoviesData:selectedObject-sent', (evt) =>{
     const parent = document.querySelector('#ghibliMainBody');
@@ -24,29 +24,33 @@ MoviesParentView.prototype.bindEvents = function () {
     movieView.renderSelected(evt.detail);
   })
 
-  dropDownList.addEventListener('change',(evt) => {
-    const indexNumber = evt.target.value;
-    if(indexNumber === 'all'){
+  dateDropDownList.addEventListener('change',(evt) => {
+    const year = evt.target.value;
+    if(year === 'all'){
       this.renderParentView();
     } else {
-      PubSub.publish('MoviesParentView:publish_selected',indexNumber);
+      PubSub.publish('MoviesParentView:publish_selected',year);
     }
   })
 };
+
 MoviesParentView.prototype.buildDateDropDown = function() {
-  const dropDownList = document.querySelector('#dateDropDown');
+  PubSub.subscribe('MoviesData:sending-yearData', function(evt) {
 
-  const dropDownAll = document.createElement('option');
-  dropDownAll.textContent = 'All';
-  dropDownAll.value = 'all';
-  dropDownList.appendChild(dropDownAll);
+    const dropDownList = document.querySelector('#dateDropDown');
 
-  const dropDownDates = this.getDateData();
+    const dropDownAll = document.createElement('option');
+    dropDownAll.textContent = 'All';
+    dropDownAll.value = 'all';
+    dropDownList.appendChild(dropDownAll);
 
-  dropDownDates.forEach(function(dropDownItem,index){
-    moviesDropDownView = new MoviesDropDownView();
-    moviesDropDownView.buildDropDown(dropDownItem,index,dropDownList);
-  })
+    const dropDownDates = evt.detail;
+
+    dropDownDates.forEach(function(dropDownItem,index){
+      moviesDropDownView = new MoviesDropDownView();
+      moviesDropDownView.buildDropDown(dropDownItem,dropDownItem,dropDownList);
+    });
+  });
 };
 
 MoviesParentView.prototype.buildRateDropDown = function() {
@@ -69,25 +73,6 @@ MoviesParentView.prototype.getRateData = function () {
   return this.moviesData.map(function(movieItem){
     return movieItem.rt_score;
   });
-};
-
-MoviesParentView.prototype.unique = function (array) {
-  const newArray = [];
-
-  array.forEach(function(item){
-    if(!newArray.includes(item)){
-      newArray.push(item);
-    }
-  });
-  console.log(newArray);
-  return newArray;
-};
-
-MoviesParentView.prototype.getDateData = function () {
-  const array = this.moviesData.map(function(movieItem){
-    return movieItem.release_date;
-  });
-  return this.unique(array)
 };
 
 MoviesParentView.prototype.renderParentView = function () {

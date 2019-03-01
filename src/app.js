@@ -9,6 +9,6 @@ document.addEventListener('DOMContentLoaded', () => {
 
   moviesData = new MoviesData('https://ghibliapi.herokuapp.com/films');
   moviesData.getData();
-  moviesData.bindEvents();
+  // moviesData.bindEvents();
 
 });
