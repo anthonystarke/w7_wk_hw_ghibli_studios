@@ -1,0 +1,15 @@
+
+
+/* #ghibliMainBody{
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+}
+
+.movieItem{
+  grid-column: auto;
+  border-width: 9px;
+  border-style: solid;
+  border-color: orange;
+  border-radius:15%;
+  padding:15px;
+} */
