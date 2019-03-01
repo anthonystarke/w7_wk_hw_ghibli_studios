@@ -9,30 +9,25 @@ MovieView.prototype.buildElement = function (element,content,parent) {
   parent.appendChild(newItem);
 };
 
-MovieView.prototype.buildItem = function () {
-
-};
-
-MovieView.prototype.render = function (moviesData) {
+MovieView.prototype.buildItem = function (movieObject) {
 
   const container = document.createElement('div');
   container.classList.add('movieItem');
   this.primaryParent.appendChild(container);
 
+  this.buildElement('h2',movieObject.title,container);
+  this.buildElement('p',`Score: ${movieObject.rt_score}`,container);
+  this.buildElement('p',movieObject.description,container);
+};
+
+MovieView.prototype.render = function (moviesData) {
+
   if(!Array.isArray(moviesData)){
-
-    this.buildElement('h2',moviesData.title,container);
-    this.buildElement('p',`Score: ${moviesData.rt_score}`,container);
-    this.buildElement('p',moviesData.description,container);
-
+    this.buildItem(moviesData);
   } else {
 
     moviesData.forEach((movie) => {
-
-      this.buildElement('h2',movie.title,container);
-      this.buildElement('p',`Score: ${movie.rt_score}`,container);
-      this.buildElement('p',movie.description,container);
-
+      this.buildItem(movie);
     })
   };
 };

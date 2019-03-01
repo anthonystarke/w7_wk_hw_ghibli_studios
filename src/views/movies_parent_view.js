@@ -6,6 +6,9 @@ const MoviesParentView = function() {
 };
 
 MoviesParentView.prototype.bindEvents = function () {
+  const dateDropDownList = document.querySelector('#dateDropDown');
+  const rateDropDownList = document.querySelector('#rateDropDown');
+  
   PubSub.subscribe('MoviesData:sending-Data',(evt) => {
     this.moviesData = evt.detail;
     this.renderParentView();
@@ -13,11 +16,8 @@ MoviesParentView.prototype.bindEvents = function () {
     this.buildRateDropDown();
   });
 
-  const dateDropDownList = document.querySelector('#dateDropDown');
-  const rateDropDownList = document.querySelector('#rateDropDown');
-
   PubSub.subscribe('MoviesData:selectedObject-sent', (evt) =>{
-    const parent = document.querySelector('#ghibliMainBody');
+    const parent = document.querySelector('#main-body');
     parent.innerHTML = '';
 
     const movieView = new MovieView(parent);
@@ -87,7 +87,7 @@ MoviesParentView.prototype.buildRateDropDown = function() {
 
 MoviesParentView.prototype.renderParentView = function () {
 
-  const primaryParent = document.querySelector('#ghibliMainBody');
+  const primaryParent = document.querySelector('#main-body');
   primaryParent.textContent = '';
 
   this.moviesData.forEach(function(movieItem){

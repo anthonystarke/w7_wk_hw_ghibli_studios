@@ -1,6 +1,6 @@
 
 
-/* #ghibliMainBody{
+#main-body{
   display: grid;
   grid-template-columns: repeat(3, 1fr);
 }
@@ -9,7 +9,7 @@
   grid-column: auto;
   border-width: 9px;
   border-style: solid;
-  border-color: orange;
+  border-color: black;
   border-radius:15%;
   padding:15px;
-} */
+}
