@@ -9,7 +9,6 @@ MoviesDropDownView.prototype.buildDropDown = function (dropDownData,index,dropDo
   const dropDownItem = document.createElement('option');
   dropDownItem.textContent = dropDownData;
   dropDownItem.value = index;
-
   dropDownList.appendChild(dropDownItem);
 
 };

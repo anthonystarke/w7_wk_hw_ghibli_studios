@@ -18,34 +18,39 @@ MoviesData.prototype.getData = function () {
 MoviesData.prototype.publishData = function () {
   this.bindEvents();
   this.publishAllData();
-  this.publishYearData();
+  this.publishList('release_date');
+  this.publishList('rt_score');
+};
+
+MoviesData.prototype.bindEvents = function () {
+  PubSub.subscribe('MoviesParentView:publishYear_selected', (evt) => {
+    const movieObject = this.getSelectedObject("release_date",evt.detail);
+    PubSub.publish('MoviesData:selectedObject-sent',movieObject);
+  })
+  PubSub.subscribe('MoviesParentView:publishRate_selected', (evt) => {
+    const movieObject = this.getSelectedObject("rt_score",evt.detail);
+    PubSub.publish('MoviesData:selectedObject-sent',movieObject);
+  })
 };
 
 MoviesData.prototype.publishAllData = function () {
   PubSub.publish('MoviesData:sending-Data',this.moviesData);
 };
 
-MoviesData.prototype.bindEvents = function () {
-  PubSub.subscribe('MoviesParentView:publish_selected', (evt) => {
-    const movieObject = this.getSelectedObject(evt.detail);
-    PubSub.publish('MoviesData:selectedObject-sent',movieObject);
-  })
+MoviesData.prototype.publishList = function (listOf) {
+  const yearList = this.getList(listOf);
+  PubSub.publish(`MoviesData:sending-${listOf}`,yearList.sort());
 };
 
-MoviesData.prototype.publishYearData = function () {
-  const yearData = this.getYearData();
-  PubSub.publish('MoviesData:sending-yearData',yearData);
-};
-
-MoviesData.prototype.getYearData = function () {
+MoviesData.prototype.getList = function (listItem) {
   const array = this.moviesData.map(function(movieItem){
-    return movieItem.release_date;
+    return movieItem[listItem];
   });
   return this.unique(array)
 };
 
-MoviesData.prototype.getSelectedObject = function(release_year) {
-  return this.moviesData.filter( movie => movie.release_date === release_year);
+MoviesData.prototype.getSelectedObject = function(key,check) {
+  return this.moviesData.filter( movie => movie[key] === check);
 };
 
 MoviesData.prototype.unique = function (array) {
@@ -57,6 +62,5 @@ MoviesData.prototype.unique = function (array) {
   },[]);
   return newArray;
 };
-
 
 module.exports = MoviesData;
