@@ -1,15 +1,46 @@
-
-
-#main-body{
+#page-title-container{
   display: grid;
   grid-template-columns: repeat(3, 1fr);
 }
 
+#page-title{
+  grid-column: 2;
+
+}
+
+#selector-container{
+  display: grid;
+  grid-template-columns: repeat(5, 1fr);
+  margin-left:1em;
+}
+#selector{
+  grid-column: auto;
+}
+
+#main-body{
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  margin:1em;
+}
+
 .movieItem{
   grid-column: auto;
-  border-width: 9px;
+  border-width: 1px;
   border-style: solid;
-  border-color: black;
+  border-color: blue;
   border-radius:15%;
-  padding:15px;
+  padding:1em;
+  margin:0.5em;
+  box-shadow: 12px 12px 2px 1px rgba(0, 0, 125, .2);
+}
+
+.movieItems{
+  grid-column: auto;
+  border-width: 1px;
+  border-style: solid;
+  border-color: purple;
+  border-radius:15%;
+  padding:1em;
+  margin:0.5em;
+  box-shadow: 12px 12px 2px 1px rgba(75, 0, 125, .2);
 }
