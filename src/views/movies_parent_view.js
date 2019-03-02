@@ -8,11 +8,12 @@ const MoviesParentView = function() {
 MoviesParentView.prototype.bindEvents = function () {
   const dateDropDownList = document.querySelector('#dateDropDown');
   const rateDropDownList = document.querySelector('#rateDropDown');
-  const mainBodyClick = document.querySelector('#main-body');
+  const mainBodyClick = document.querySelectorAll('.movieItems');
+
   console.log(mainBodyClick);
   // mainBodyClick.addEventListener('click',(evt)=> {
-  // console.log(evt.target.div);
-// })
+  //   console.dir(evt.target.id);
+  // })
 
   PubSub.subscribe('MoviesData:sending-Data',(evt) => {
     this.moviesData = evt.detail;

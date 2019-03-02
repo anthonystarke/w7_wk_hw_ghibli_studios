@@ -7,7 +7,6 @@
   grid-column: 2;
   text-align:center;
   font-size:3em;
-
 }
 
 body{
@@ -24,7 +23,6 @@ body{
 #selector{
   grid-column: auto;
   margin:0.5em;
-
 }
 
 #main-body{
@@ -56,6 +54,10 @@ body{
   margin:0.5em;
   box-shadow: 12px 12px 2px 1px rgba(50,50,125,.5);
 }
+#loadingHeader{
+  color:white;
+}
+
 
 .itemHeader{
   /* font-weight: normal; */
@@ -77,7 +79,6 @@ body{
 }
 
 #selector{
-  color:white;
+  color:darkblue;
   font-weight: bold;
-
 }

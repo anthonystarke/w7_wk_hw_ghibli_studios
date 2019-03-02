@@ -14,6 +14,7 @@ MovieView.prototype.buildItem = function (movieObject,className) {
 
   const container = document.createElement('div');
   container.classList.add(className);
+  container.setAttribute('id',"test");
   this.primaryParent.appendChild(container);
 
   const itemHeader = this.buildElement('h2',movieObject.title,container);
@@ -31,7 +32,7 @@ MovieView.prototype.buildItem = function (movieObject,className) {
 };
 
 MovieView.prototype.render = function (moviesData) {
-
+  
   if(!Array.isArray(moviesData)){
     this.buildItem(moviesData,'movieItems');
   } else {
@@ -40,6 +41,9 @@ MovieView.prototype.render = function (moviesData) {
       this.buildItem(movie,'movieItem');
     })
   };
+  const mainBodyClick = document.querySelectorAll('.movieItems');
+
+  console.log(mainBodyClick);
 };
 
 module.exports = MovieView;
