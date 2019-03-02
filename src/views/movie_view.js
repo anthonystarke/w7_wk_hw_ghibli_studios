@@ -7,7 +7,7 @@ MovieView.prototype.buildElement = function (element,content,parent) {
   const newItem = document.createElement(element);
   newItem.textContent = content;
   parent.appendChild(newItem);
-  // return newItem;
+  return newItem;
 };
 
 MovieView.prototype.buildItem = function (movieObject,className) {
@@ -16,21 +16,28 @@ MovieView.prototype.buildItem = function (movieObject,className) {
   container.classList.add(className);
   this.primaryParent.appendChild(container);
 
-  this.buildElement('h2',movieObject.title,container);
-  this.buildElement('p',`Score: ${movieObject.rt_score}`,container);
-  this.buildElement('p',`Release Year: ${movieObject.release_date}`,container);
-  this.buildElement('p',movieObject.description,container);
+  const itemHeader = this.buildElement('h2',movieObject.title,container);
+  itemHeader.classList.add('itemHeader');
+
+  const itemScore = this.buildElement('p',`Score: ${movieObject.rt_score}`,container);
+  itemScore.classList.add('itemScore');
+
+  const itemReleaseDate = this.buildElement('p',`Release Year: ${movieObject.release_date}`,container);
+  itemReleaseDate.classList.add('itemReleaseDate');
+
+  const itemDescription = this.buildElement('p',movieObject.description,container);
+  itemDescription.classList.add('itemDescription');
 
 };
 
 MovieView.prototype.render = function (moviesData) {
 
   if(!Array.isArray(moviesData)){
-    this.buildItem(moviesData,'movieItem');
+    this.buildItem(moviesData,'movieItems');
   } else {
 
     moviesData.forEach((movie) => {
-      this.buildItem(movie,'movieItems');
+      this.buildItem(movie,'movieItem');
     })
   };
 };

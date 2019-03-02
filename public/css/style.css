@@ -5,7 +5,15 @@
 
 #page-title{
   grid-column: 2;
+  text-align:center;
+  font-size:3em;
 
+}
+
+body{
+  background-image: url('../images/studio_ghibli.jpg');
+  background-repeat: no-repeat;
+  background-attachment: fixed;
 }
 
 #selector-container{
@@ -15,6 +23,8 @@
 }
 #selector{
   grid-column: auto;
+  margin:0.5em;
+
 }
 
 #main-body{
@@ -27,20 +37,47 @@
   grid-column: auto;
   border-width: 1px;
   border-style: solid;
-  border-color: blue;
+  border-color: rgba(90,50,75,.8);
   border-radius:15%;
+  background-color: rgba(90,50,75,.8);
   padding:1em;
   margin:0.5em;
-  box-shadow: 12px 12px 2px 1px rgba(0, 0, 125, .2);
+  box-shadow: 12px 12px 2px 1px rgba(90,50,75,.5);
 }
 
 .movieItems{
   grid-column: auto;
   border-width: 1px;
   border-style: solid;
-  border-color: purple;
+  border-color: rgba(50,50,125,.8);
   border-radius:15%;
+  background-color: rgba(50,50,125,.8);
   padding:1em;
   margin:0.5em;
-  box-shadow: 12px 12px 2px 1px rgba(75, 0, 125, .2);
+  box-shadow: 12px 12px 2px 1px rgba(50,50,125,.5);
+}
+
+.itemHeader{
+  /* font-weight: normal; */
+  color:white;
+}
+
+.itemScore{
+  /* font-weight: normal; */
+  color:white;
+}
+
+.itemReleaseDate{
+  /* font-weight: normal; */
+  color:white;
+}
+.itemDescription{
+  /* font-weight: normal; */
+  color:white;
+}
+
+#selector{
+  color:white;
+  font-weight: bold;
+
 }
