@@ -8,19 +8,19 @@ const MoviesParentView = function() {
 MoviesParentView.prototype.bindEvents = function () {
   const dateDropDownList = document.querySelector('#dateDropDown');
   const rateDropDownList = document.querySelector('#rateDropDown');
-  const mainBodyClick = document.querySelectorAll('.movieItems');
+  const mainBodyClick = document.querySelector('#page-title-container');
 
-  console.log(mainBodyClick);
-  // mainBodyClick.addEventListener('click',(evt)=> {
-  //   console.dir(evt.target.id);
-  // })
+  mainBodyClick.addEventListener('click',(evt) => {
+    rateDropDownList.selectedIndex = 0;
+    dateDropDownList.selectedIndex = 0;
+    this.renderParentView();
+  });
 
   PubSub.subscribe('MoviesData:sending-Data',(evt) => {
     this.moviesData = evt.detail;
     this.renderParentView();
     this.buildDateDropDown();
     this.buildRateDropDown();
-
   });
 
   PubSub.subscribe('MoviesData:selectedObject-sent', (evt) =>{
@@ -93,14 +93,29 @@ MoviesParentView.prototype.buildRateDropDown = function() {
 };
 
 MoviesParentView.prototype.renderParentView = function () {
+  const promise = new Promise((resolve,reject) => {
+    const primaryParent = document.querySelector('#main-body');
+    primaryParent.textContent = '';
 
-  const primaryParent = document.querySelector('#main-body');
-  primaryParent.textContent = '';
+    this.moviesData.forEach(function(movieItem){
+      const movieView = new MovieView(primaryParent);
+      movieView.render(movieItem);
+    });
+    resolve();
+  })
+    .then(() => {
+      const mainBodyClick = document.querySelectorAll('.movieItems');
+      mainBodyClick.forEach((item) => {
 
-  this.moviesData.forEach(function(movieItem){
-    const movieView = new MovieView(primaryParent);
-    movieView.render(movieItem);
-  });
+        item.addEventListener('click', (evt) => {
+          if(evt.target.className.includes('item')) {
+            PubSub.publish('movies_parent_div_selected:item-sent',evt.target.parentNode)
+          } else{
+            PubSub.publish('movies_parent_div_selected:item-sent',evt.target)
+          }
+        })
+      });
+    });
 };
 
 module.exports = MoviesParentView;

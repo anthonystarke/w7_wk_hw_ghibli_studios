@@ -31,6 +31,12 @@ MoviesData.prototype.bindEvents = function () {
     const movieObject = this.getSelectedObject("rt_score",evt.detail);
     PubSub.publish('MoviesData:selectedObject-sent',movieObject);
   })
+
+  PubSub.subscribe('movies_parent_div_selected:item-sent', (evt) => {
+    const movieDiv = evt.detail;
+    const movieObject = this.getSelectedObjectFromName(movieDiv.id);
+    PubSub.publish('MoviesData:selectedObject-sent',movieObject);
+  })
 };
 
 MoviesData.prototype.publishAllData = function () {
@@ -51,6 +57,10 @@ MoviesData.prototype.getList = function (listItem) {
 
 MoviesData.prototype.getSelectedObject = function(key,check) {
   return this.moviesData.filter( movie => movie[key] === check);
+};
+
+MoviesData.prototype.getSelectedObjectFromName = function (name) {
+  return this.moviesData.filter( movie => movie['title'].split(' ').join('') === name)
 };
 
 MoviesData.prototype.unique = function (array) {
