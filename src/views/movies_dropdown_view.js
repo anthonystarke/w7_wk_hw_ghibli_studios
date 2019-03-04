@@ -1,7 +1,6 @@
 
 const MoviesDropDownView = function(){
 
-
 }
 
 MoviesDropDownView.prototype.buildDropDown = function (dropDownData,index,dropDownList) {

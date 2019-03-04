@@ -56,7 +56,7 @@ MovieView.prototype.buildItemFull = function (movieObject,className) {
   const itemDirector = this.buildElement('p',`Director: ${movieObject.director}`,container);
   itemDirector.classList.add('itemDirector');
 
-  const itemProducer = this.buildElement('p',`Director: ${movieObject.producer}`,container);
+  const itemProducer = this.buildElement('p',`Producer: ${movieObject.producer}`,container);
   itemProducer.classList.add('itemProducer');
 
   const itemDescription = this.buildElement('p',movieObject.description,container);
